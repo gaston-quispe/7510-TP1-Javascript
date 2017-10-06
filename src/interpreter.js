@@ -1,12 +1,13 @@
 var Interpreter = function () {
 
-    this.parseDB = function (params, paramss, paramsss) {
+	this.parseDB = function (params, paramss, paramsss) {
 
-    }
 
-    this.checkQuery = function (params) {
-        return true;
-    }
+	}
+
+	this.checkQuery = function (params) {
+		return true;
+	}
 
 }
 
