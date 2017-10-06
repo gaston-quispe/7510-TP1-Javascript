@@ -1,11 +1,15 @@
-var Diccionario = function (nombre, listaValores) {
-	this.listaCheckeables = new Array();
+var Diccionario = function () {
+	this.evaluables = new Array();
+
+	this.addEvaluable = function (evaluable) {
+		this.evaluables.push(evaluable);
+	}
 
 	this.consultar = function(consulta) {
-		for (var i = 0; i < this.listaCheckeables.length; i++) {
-			if (this.listaCheckeables[i].consultar(this, consulta))
+		for (var i = 0; i < this.evaluables.length; i++)
+			if (this.evaluables[i].evaluar(consulta, this))
 				return true;
-		}
+
 		return false;
 	}
 }

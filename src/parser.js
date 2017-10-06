@@ -1,10 +1,13 @@
++
 var Definicion = require('../src/definicion');
-var Regla = require('../src/regla');
+var Regla = require('../src/regla');var Consulta = require('../src/consulta');
 
 var Parser = function () {
 
-	this.parserConsulta = function() {
-
+	this.parsearConsulta = function(linea) {
+		var nombre =  linea.split('(')[0];
+		var valores = linea.split('(')[1].replace(" ", "").replace(/\)|\.$/g, "").split(",");
+		return new Consulta(nombre, valores);
 	}
 
 	this.esDefinicionValida = function(linea) {
@@ -19,8 +22,8 @@ var Parser = function () {
 
 	this.parsearDefinicion = function(linea) {
 		var nombre =  linea.split('(')[0];
-		var lista_valores = linea.split('(')[1].replace(" ", "").replace(/\)|\.$/g, "").split(",");
-		return new Definicion(nombre, lista_valores);
+		var valores = linea.split('(')[1].replace(" ", "").replace(/\)|\.$/g, "").split(",");
+		return new Definicion(nombre, valores);
 	}
 
 	this.parsearRegla = function(linea) {
@@ -35,18 +38,17 @@ var Parser = function () {
 		var aux = der.replace(/\),/g, "\)#").split("#");
 
 		definiciones = [];
-		for (var i = 0; i < aux.length; i++) {
+		for (var i = 0; i < aux.length; i++)
 			definiciones.push(this.parsearDefinicion(aux[i]));
-		}
-		
+
 		return new Regla(nombre, parametros, definiciones);
 	}
 
 	this.parsear = function (linea) {
 		if (this.esDefinicionValida(linea)) {
-			//return this.parsearDefinicion(linea);
+			return this.parsearDefinicion(linea);
 		} else if (this.esReglaValida(linea)) {
-			//return this.parserRegla(linea);
+			return this.parsearRegla(linea);
 		} else {
 			return nil;
 		}
