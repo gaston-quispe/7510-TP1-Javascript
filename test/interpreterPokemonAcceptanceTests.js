@@ -196,15 +196,15 @@ describe("Interpreter Pokemon:", function () {
 	    	    	"mujer(yenni).",
 	    	    	"entrenador(ash).",
 	    	    	"entrenador(misty).",
-			// Si bien se detectan las llamadas recursivas simples,
-			// no se detecta la recursividad dada por llamadas circulares
-			// en las que intervengan tres o mas reglas.
+			// Si bien se detectan las llamadas recursivas simples dentro
+			// de la misma regla, no se detecta la recursividad dada
+			// por llamadas circulares entre dos o mas reglas.
 	    	    	"es_entrenador_mujer(X) :- mujer(X), es_entrenador_mujer(X)."
 		];
 
 		expect(function () { interpreter.parseDB(db_recursivo); })
 		    .to.throw(Error)
-		    .with.property('message', 'Error al intentar parsear la linea numero 7: es_entrenador_mujer(X) :- mujer(X), es_entrenador_mujer(X).');
+		    .with.property('message', 'Error de parseo en la linea numero 7: es_entrenador_mujer(X) :- mujer(X), es_entrenador_mujer(X).');
 	});
 
      });

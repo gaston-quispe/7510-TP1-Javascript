@@ -28,6 +28,18 @@ var ParserRegla = function () {
 		return false;
 	}
 
+	var laReglaTieneParametrosInconsistentes = function (parametros, consultasParametricas) {
+		var parametros_de_consultas = [];
+		for (var i = 0; i < consultasParametricas.length; i++)
+			parametros_de_consultas = parametros_de_consultas.concat(consultasParametricas[i].getParametros());
+
+		for (var i = 0; i < parametros_de_consultas.length; i++)
+			if (parametros.indexOf(parametros_de_consultas[i]) === -1)
+				return true;
+
+		return false;
+	}
+
 	this.parsearLinea = function(linea) {
 		if (!esReglaValida(linea))
 			return null;
@@ -47,6 +59,9 @@ var ParserRegla = function () {
 			consultasParametricas.push(parserConsultaParametrica.parsearLinea(aux[i]));
 
 		if (laReglaEsRecursiva(nombre, consultasParametricas))
+			return null;
+
+		if (laReglaTieneParametrosInconsistentes(parametros, consultasParametricas))
 			return null;
 
 		return new Regla(nombre, parametros, consultasParametricas);

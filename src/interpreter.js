@@ -17,7 +17,7 @@ var Interpreter = function () {
 			var evaluable = parser.parsearEvaluable(db[i].replace(/\.$/, ""));
 			if (evaluable === null) {
 				broken = true;
-				throw new Error("Error al intentar parsear la linea numero " + (i + 1) + ": " + db[i]);
+				throw new Error("Error de parseo en la linea numero " + (i + 1) + ": " + db[i]);
 			}
 			diccionario.addEvaluable(evaluable);
 		}

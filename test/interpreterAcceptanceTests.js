@@ -95,7 +95,7 @@ describe("Interpreter:", function () {
 
 		    expect(function () { interpreter.parseDB(db_broken); })
 		    	.to.throw(Error)
-			.with.property('message', 'Error al intentar parsear la linea numero 3: hija(X, Y) :- mujer(');
+			.with.property('message', 'Error de parseo en la linea numero 3: hija(X, Y) :- mujer(');
 	    });
 
 	    it('if db is broken => hijo(pepe, juan) should be null', function () {
@@ -116,6 +116,23 @@ describe("Interpreter:", function () {
 			// Ignoro Excepcion
 			assert(interpreter.checkQuery('hijo(pepe, juan)') === null);
 		    }
+	    });
+
+	    it('if alguna regla de db tiene inconsistencia en los parametros => interpreter.parseDB(db_inconsistent) should be raise Error', function () {
+
+		    var db_inconsistent = [
+			    "varon(juan).",
+		            "varon(pepe).",
+		            "padre(juan, pepe).",
+		            "padre(juan, pepa).",
+			    // La B no es un argumento valido
+		            "hijo(X, Y) :- varon(X), padre(Y, B)."
+		    ];
+		    var interpreter = new Interpreter();
+
+		    expect(function () { interpreter.parseDB(db_inconsistent); })
+			.to.throw(Error)
+			.with.property('message', 'Error de parseo en la linea numero 5: hijo(X, Y) :- varon(X), padre(Y, B).');
 	    });
 
     });

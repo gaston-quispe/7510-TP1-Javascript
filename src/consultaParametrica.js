@@ -11,6 +11,10 @@ var ConsultaParametrica = function (nombre, parametros) {
 		return nombre;
 	}
 
+	this.getParametros = function() {
+		return parametros;
+	}
+
 	this.reemplazarParametros = function (corresponencia) {
 		var valores = [];
 
