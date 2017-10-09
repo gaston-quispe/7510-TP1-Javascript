@@ -5,7 +5,7 @@ var assert = require('assert');
 var Interpreter = require('../src/interpreter');
 
 
-describe("Interpreter Pokemon", function () {
+describe("Interpreter Pokemon:", function () {
 
     var db = [
 	    	"varon(ash).",
@@ -179,14 +179,35 @@ describe("Interpreter Pokemon", function () {
 
      describe('Reglas anidadas', function () {
 	it('es_entrenador_mujer_x_de_pokemon_y_de_tipo_z(misty,starmie,agua) should be true', function () {
-	 assert(interpreter.checkQuery('es_entrenador_mujer_x_de_pokemon_y_de_tipo_z(misty,starmie,agua)') === true);
+	 	assert(interpreter.checkQuery('es_entrenador_mujer_x_de_pokemon_y_de_tipo_z(misty,starmie,agua)') === true);
 	});
 	it('mastro_pokemon(ash) should be true', function () {
-	 assert(interpreter.checkQuery('mastro_pokemon(ash)') === true);
+	 	assert(interpreter.checkQuery('mastro_pokemon(ash)') === true);
 	});
 	it('maestra_pokemon(misty) should be false', function () {
-	 assert(interpreter.checkQuery('mastra_pokemon(misty)') === false);
+	 	assert(interpreter.checkQuery('mastra_pokemon(misty)') === false);
 	});
+
+	it('if db contiene reglas recursivas simples => interpreter.parseDB(db_recursivo) should be raise Error', function () {
+
+		var db_recursivo = [
+	    	    	"varon(ash).",
+	    	    	"varon(tracey).",
+	    	    	"mujer(misty).",
+	    	    	"mujer(yenni).",
+	    	    	"entrenador(ash).",
+	    	    	"entrenador(misty).",
+			// Si bien se detectan las llamadas recursivas simples,
+			// no se detecta la recursividad dada por llamadas circulares
+			// en las que intervengan tres o mas reglas.
+	    	    	"es_entrenador_mujer(X) :- mujer(X), es_entrenador_mujer(X)."
+		];
+
+		expect(function () { interpreter.parseDB(db_recursivo); })
+		    .to.throw(Error)
+		    .with.property('message', 'Error al intentar parsear la linea numero 7: es_entrenador_mujer(X) :- mujer(X), es_entrenador_mujer(X).');
+	});
+
      });
 
 });

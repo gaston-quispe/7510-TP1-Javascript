@@ -7,7 +7,7 @@ var Definicion = require('../src/definicion');
 var Consulta = require('../src/consulta');
 var Regla = require('../src/regla');
 
-describe("Definicion", function () {
+describe("Definicion:", function () {
 
 	var parser = null;
 
@@ -25,6 +25,14 @@ describe("Definicion", function () {
 
 	afterEach(function () {
 		// runs after each test in this block
+	});
+
+	describe('Creacion test', function () {
+		it('new Definicion() should be instanceof Definicion', function () {
+			var definicion_creada = new Definicion("hijo", ["juan","pepe"]);
+
+			assert(definicion_creada instanceof Definicion === true);
+		});
 	});
 
 	describe('Consulta test', function () {

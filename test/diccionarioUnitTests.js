@@ -9,7 +9,7 @@ var Consulta = require('../src/consulta');
 var Regla = require('../src/regla');
 var ConsultaParametrica = require('../src/consultaParametrica');
 
-describe("Diccionario", function () {
+describe("Diccionario:", function () {
 
 	var diccionario = null;
 

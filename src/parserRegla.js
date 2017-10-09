@@ -20,6 +20,14 @@ var ParserRegla = function () {
 		return false;
 	}
 
+	var laReglaEsRecursiva = function (nombreRegla, consultasParametricas) {
+		for (var i = 0; i < consultasParametricas.length; i++)
+			if (consultasParametricas[i].getNombre() === nombreRegla)
+				return true;
+				
+		return false;
+	}
+
 	this.parsearLinea = function(linea) {
 		if (!esReglaValida(linea))
 			return null;
@@ -37,6 +45,9 @@ var ParserRegla = function () {
 		var consultasParametricas = [];
 		for (var i = 0; i < aux.length; i++)
 			consultasParametricas.push(parserConsultaParametrica.parsearLinea(aux[i]));
+
+		if (laReglaEsRecursiva(nombre, consultasParametricas))
+			return null;
 
 		return new Regla(nombre, parametros, consultasParametricas);
 	}
