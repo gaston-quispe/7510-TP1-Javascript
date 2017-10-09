@@ -89,22 +89,25 @@ describe("Interpreter", function () {
 
     describe('Broken db', function () {
 
-	    it('interpreter2.parseDB(db_broken) should be null', function () {
-
+	    it('interpreter.parseDB(db_broken) should be raise exception', function () {
 		    var db_broken = [
 			    "varon(juan).",
 		            "varon(pepe).",
-		            "padre(juan, pepe).",
-		            "padre(juan, pepa).",
-		            "hijo(X, Y) :- varon(X), padre(Y, X).",
 		            "hija(X, Y) :- mujer("
 		    ];
 
 		    var interpreter = new Interpreter();
-		    assert(interpreter.parseDB(db_broken) === null);
+
+		    var excepcionCorrecta = false;
+		    try {
+			   interpreter.parseDB(db_broken);
+		    } catch(error) {
+			    excepcionCorrecta = (error.toString() === "Error: Error al intentar parsear la linea numero 3: hija(X, Y) :- mujer(");;
+		    }
+		    assert(excepcionCorrecta === true);
 	    });
 
-	    it('hijo(pepe, juan) should be null', function () {
+	    it('if db is broken => hijo(pepe, juan) should be null', function () {
 
 		    var db_broken = [
 			    "varon(juan).",
@@ -114,10 +117,14 @@ describe("Interpreter", function () {
 		            "hijo(X, Y) :- varon(X), padre(Y, X).",
 		            "hija(X, Y) :- mujer("
 		    ];
-
 		    var interpreter = new Interpreter();
-		    interpreter.parseDB(db_broken);
-		    assert(interpreter.checkQuery('hijo(pepe, juan)') === null);
+
+		    try {
+			interpreter.parseDB(db_broken);
+		    } catch(error) {
+			// Ignoro Excepcion
+			assert(interpreter.checkQuery('hijo(pepe, juan)') === null);
+		    }
 	    });
 
     });
