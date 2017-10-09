@@ -1,5 +1,8 @@
 var Definicion = function (nombre, valores) {
+	// EJEMPLO SEGUN: "padre(roberto, alejandro)"
+	// "padre"
 	this.nombre = nombre;
+	// ["roberto", "alejandro"]
 	this.valores = valores;
 
 	this.iguales = function (evaluable) {

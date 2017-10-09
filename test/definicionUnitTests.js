@@ -33,10 +33,5 @@ describe("Definicion", function () {
 			var c = new Consulta("padre", ["juan", "pepe"]);
 			assert(d.evaluar(c) === true);
 		});
-
-		// it('lalala', function () {
-		// 	var d = new Definicion("padre", ["X", "Y"]);
-		// 	console.log(d.reemplazarParametros({"X": "juan", "Y": "pepe"}));
-		// });
 	});
 });

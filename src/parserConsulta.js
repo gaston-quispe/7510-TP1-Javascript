@@ -3,9 +3,8 @@ var Consulta = require('../src/consulta');
 var ParserConsulta = function () {
 
 	var esConsultaValida = function(linea) {
-		var patt = /^.*:-.*$/i;
-
-		return !patt.test(linea);
+		var patt = /^\s*[a-z_]+\s*\(((\s*[a-z_]+\s*),)*((\s*[a-z_]+\s*))\)\s*$/;
+		return patt.test(linea);
 	}
 
 	this.parsearLinea = function(linea) {

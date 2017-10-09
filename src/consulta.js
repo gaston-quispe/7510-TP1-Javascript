@@ -1,5 +1,9 @@
 var Consulta = function (nombre, valores) {
+
+	// EJEMPLO SEGUN: "padre(juan, pepe)"
+	// "padre"
 	this.nombre = nombre;
+	// ["juan", "pepe"]
 	this.valores = valores;
 
 	this.iguales = function (evaluable) {

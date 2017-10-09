@@ -87,4 +87,39 @@ describe("Interpreter", function () {
 
     });
 
+    describe('Broken db', function () {
+
+	    it('interpreter2.parseDB(db_broken) should be null', function () {
+
+		    var db_broken = [
+			    "varon(juan).",
+		            "varon(pepe).",
+		            "padre(juan, pepe).",
+		            "padre(juan, pepa).",
+		            "hijo(X, Y) :- varon(X), padre(Y, X).",
+		            "hija(X, Y) :- mujer("
+		    ];
+
+		    var interpreter = new Interpreter();
+		    assert(interpreter.parseDB(db_broken) === null);
+	    });
+
+	    it('hijo(pepe, juan) should be null', function () {
+
+		    var db_broken = [
+			    "varon(juan).",
+		            "varon(pepe).",
+		            "padre(juan, pepe).",
+		            "padre(juan, pepa).",
+		            "hijo(X, Y) :- varon(X), padre(Y, X).",
+		            "hija(X, Y) :- mujer("
+		    ];
+
+		    var interpreter = new Interpreter();
+		    interpreter.parseDB(db_broken);
+		    assert(interpreter.checkQuery('hijo(pepe, juan)') === null);
+	    });
+
+    });
+
 });

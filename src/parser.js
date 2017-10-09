@@ -12,7 +12,7 @@ var Parser = function (parserConsulta, parsersDB) {
 			if (evaluable)
 				return evaluable;
 		}
-		return nil;
+		return null;
 	}
 }
 

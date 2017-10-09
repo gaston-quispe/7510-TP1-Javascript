@@ -7,6 +7,7 @@ var Parser = require('../src/parser');
 var Definicion = require('../src/definicion');
 var Consulta = require('../src/consulta');
 var Regla = require('../src/regla');
+var ConsultaParametrica = require('../src/consultaParametrica');
 
 describe("Diccionario", function () {
 
@@ -36,8 +37,8 @@ describe("Diccionario", function () {
 		diccionario.addEvaluable(new Definicion("padre", ["hector", "maria"]));
 		diccionario.addEvaluable(new Definicion("padre", ["roberto", "alejandro"]));
 		diccionario.addEvaluable(new Definicion("padre", ["roberto", "cecilia"]));
-		diccionario.addEvaluable(new Regla("hijo", ["X","Y"], [new Definicion("varon", ["X"]), new Definicion("padre", ["Y","X"])]));
-		diccionario.addEvaluable(new Regla("hija", ["X","Y"], [new Definicion("mujer", ["X"]), new Definicion("padre", ["Y","X"])]));
+		diccionario.addEvaluable(new Regla("hijo", ["X","Y"], [new ConsultaParametrica("varon", ["X"]), new ConsultaParametrica("padre", ["Y","X"])]));
+		diccionario.addEvaluable(new Regla("hija", ["X","Y"], [new ConsultaParametrica("mujer", ["X"]), new ConsultaParametrica("padre", ["Y","X"])]));
 
 	});
 
@@ -53,7 +54,6 @@ describe("Diccionario", function () {
 			assert(diccionario.consultar(c) === true);
 		});
 
-		// TODO: SOPORTAR NOMBRES CON ESPACIOS???????????????
 		it('consultar(new Definicion("varon", ["facundo"])) should be false', function () {
 			var c = new Consulta("varon", ["facundo"]);
 			assert(diccionario.consultar(c) === false);

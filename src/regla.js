@@ -1,9 +1,13 @@
 var Definicion = require('../src/definicion');
 
-var Regla = function (nombre, parametros, definiciones) {
+var Regla = function (nombre, parametros, consultasParametricas) {
+	// EJEMPLO SEGUN: "hijo(X, Y) :- varon(X), padre(Y, X)"
+	// "hijo"
 	this.nombre = nombre;
+	// ["x", "Y"]
 	this.parametros = parametros;
-	this.definiciones = definiciones;
+	// [{nombre: "varon" parametros: ["X"]}, {nombre: "padre" parametros:["Y", "X"]}]
+	this.consultasParametricas = consultasParametricas;
 
 	this.iguales = function (evaluable) {
 		if (!evaluable instanceof Regla)
@@ -15,15 +19,15 @@ var Regla = function (nombre, parametros, definiciones) {
 		if (this.parametros.length !== evaluable.parametros.length)
 			return false;
 
-		if (this.definiciones.length !== evaluable.definiciones.length)
+		if (this.consultasParametricas.length !== evaluable.consultasParametricas.length)
 			return false;
 
 		for (var i = 0; i < this.parametros.length; i++)
 			if (this.parametros[i] !== evaluable.parametros[i])
 				return false;
 
-		for (var i = 0; i < this.definiciones.length; i++)
-			if (!this.definiciones[i].iguales(evaluable.definiciones[i]))
+		for (var i = 0; i < this.consultasParametricas.length; i++)
+			if (!this.consultasParametricas[i].iguales(evaluable.consultasParametricas[i]))
 				return false;
 
 		return true;
@@ -39,11 +43,10 @@ var Regla = function (nombre, parametros, definiciones) {
 
 	this.generarConsultas = function(consultaBase) {
 		var corresponencia = this.generarCorresponencia(this.parametros, consultaBase.valores);
-
 		var nuevasConsultas = [];
-		for (var i = 0; i < definiciones.length; i++)
-			nuevasConsultas.push(definiciones[i].reemplazarValores(corresponencia));
-
+		for (var i = 0; i < this.consultasParametricas.length; i++) {
+			nuevasConsultas.push(this.consultasParametricas[i].reemplazarParametros(corresponencia));
+		}
 		return nuevasConsultas;
 	}
 
