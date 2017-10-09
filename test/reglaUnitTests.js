@@ -2,7 +2,6 @@ var expect = require("chai").expect;
 var should = require('should');
 var assert = require('assert');
 
-var Parser = require('../src/parser');
 var ConsultaParametrica = require('../src/consultaParametrica');
 var Regla = require('../src/regla');
 

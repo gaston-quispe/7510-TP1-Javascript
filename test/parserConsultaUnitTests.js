@@ -4,8 +4,6 @@ var assert = require('assert');
 
 var ParserConsulta = require('../src/parserConsulta');
 var Consulta = require('../src/consulta');
-var Definicion = require('../src/definicion');
-var Regla = require('../src/regla');
 
 describe("ParserConsulta unit tests:", function () {
 

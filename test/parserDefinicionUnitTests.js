@@ -4,7 +4,6 @@ var assert = require('assert');
 
 var ParserDefinicion = require('../src/parserDefinicion');
 var Definicion = require('../src/definicion');
-var Regla = require('../src/regla');
 
 describe("ParserDefinicion unit tests:", function () {
 

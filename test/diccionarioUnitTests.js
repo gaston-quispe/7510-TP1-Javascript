@@ -3,7 +3,6 @@ var should = require('should');
 var assert = require('assert');
 
 var Diccionario = require('../src/diccionario');
-var Parser = require('../src/parser');
 var Definicion = require('../src/definicion');
 var Consulta = require('../src/consulta');
 var Regla = require('../src/regla');

@@ -24,7 +24,7 @@ var ParserRegla = function () {
 		for (var i = 0; i < consultasParametricas.length; i++)
 			if (consultasParametricas[i].getNombre() === nombreRegla)
 				return true;
-				
+
 		return false;
 	}
 

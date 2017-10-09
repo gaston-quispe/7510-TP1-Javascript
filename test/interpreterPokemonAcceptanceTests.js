@@ -4,7 +4,6 @@ var assert = require('assert');
 
 var Interpreter = require('../src/interpreter');
 
-
 describe("Interpreter Pokemon:", function () {
 
     var db = [
@@ -55,7 +54,7 @@ describe("Interpreter Pokemon:", function () {
 	    	"pokemon_x_de_tipo_y_es_fuerte_contra_tipo_z(X,Y,Z) :- pokemon(X), tipo(Y), tipo(Z), fuerte_contra(Y, Z).",
 	    	"los_dos_pokemones_son_del_tipo_z(X,Y,Z) :- pokemon(X), pokemon(Y), pokemon_tipo(X,Z), pokemon_tipo(Y,Z).",
 	    	"pokemon_x_evoluciona_a_y_de_tipo_z(X, Y, Z) :- pokemon(X), pokemon(Y), evolucion(X, Y), pokemon_tipo(Y,Z).",
-		// Reglas anidadas
+		// REGLAS ANIDADAS
 		"es_entrenador_mujer_x_de_pokemon_y_de_tipo_z(X,Y,Z) :- es_entrenador_mujer(X), pokemon_tipo(Y,Z)",
 		"mastro_pokemon(X) :- es_entrenador_varon(X), campeon(X)",
 		"maestra_pokemon(Y) :- es_entrenador_mujer(Y), campeon(Y)"

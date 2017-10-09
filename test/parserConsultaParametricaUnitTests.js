@@ -4,8 +4,6 @@ var assert = require('assert');
 
 var ParserConsultaParametrica = require('../src/parserConsultaParametrica');
 var ConsultaParametrica = require('../src/consultaParametrica');
-var Definicion = require('../src/definicion');
-var Regla = require('../src/regla');
 
 describe("ParserConsultaParametrica unit tests:", function () {
 

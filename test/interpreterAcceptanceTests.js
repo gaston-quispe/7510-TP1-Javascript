@@ -4,7 +4,6 @@ var assert = require('assert');
 
 var Interpreter = require('../src/interpreter');
 
-
 describe("Interpreter:", function () {
 
     var db = [
