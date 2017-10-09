@@ -6,7 +6,7 @@ var ParserRegla = require('../src/parserRegla');
 
 var Interpreter = function () {
 	var broken = false;
-	this.diccionario = new Diccionario();
+	diccionario = new Diccionario();
 
 	var parser = new Parser(new ParserConsulta(),
 	 			[new ParserDefinicion(), new ParserRegla()]);
@@ -18,7 +18,7 @@ var Interpreter = function () {
 				broken = true;
 				throw new Error("Error al intentar parsear la linea numero " + (i + 1) + ": " + db[i]);
 			}
-			this.diccionario.addEvaluable(evaluable);
+			diccionario.addEvaluable(evaluable);
 		}
 	}
 
@@ -26,7 +26,7 @@ var Interpreter = function () {
 		if (broken)
 			return null;
 		var consulta = parser.parsearConsulta(query);
-		return this.diccionario.consultar(consulta);
+		return diccionario.consultar(consulta);
 	}
 
 }
