@@ -67,8 +67,6 @@ describe("Interpreter", function () {
             assert(interpreter.checkQuery('padre(mario, pepe)') === false);
         });
 
-        // TODO: Add more tests
-
     });
 
     describe('Interpreter Rules', function () {
@@ -83,13 +81,11 @@ describe("Interpreter", function () {
             assert(interpreter.checkQuery('hijo(pepe, juan)'));
         });
 
-        // TODO: Add more tests
-
     });
 
     describe('Broken db', function () {
 
-	    it('interpreter.parseDB(db_broken) should be raise exception', function () {
+	    it('interpreter.parseDB(db_broken) should be raise Error', function () {
 		    var db_broken = [
 			    "varon(juan).",
 		            "varon(pepe).",
@@ -98,13 +94,9 @@ describe("Interpreter", function () {
 
 		    var interpreter = new Interpreter();
 
-		    var excepcionCorrecta = false;
-		    try {
-			   interpreter.parseDB(db_broken);
-		    } catch(error) {
-			    excepcionCorrecta = (error.toString() === "Error: Error al intentar parsear la linea numero 3: hija(X, Y) :- mujer(");;
-		    }
-		    assert(excepcionCorrecta === true);
+		    expect(function () { interpreter.parseDB(db_broken); })
+		    	.to.throw(Error)
+			.with.property('message', 'Error al intentar parsear la linea numero 3: hija(X, Y) :- mujer(');
 	    });
 
 	    it('if db is broken => hijo(pepe, juan) should be null', function () {
@@ -131,13 +123,10 @@ describe("Interpreter", function () {
 
     describe('Broken query', function () {
 	    it('interpreter.checkQuery(\'hijo(pepe,) juan)\') should be raise Error', function () {
-		    var excepcionCorrecta = false;
-		    try {
-			    interpreter.checkQuery('hijo(pepe,) juan)');
-		    } catch(error) {
-			    excepcionCorrecta = (error.toString() === "Error: Consulta malformada!");
-		    }
-		    assert(excepcionCorrecta === true);
+
+		    expect(function () { interpreter.checkQuery('hijo(pepe,) juan)'); })
+			.to.throw(Error)
+			.with.property('message', 'Consulta malformada!');
 	    });
     });
 

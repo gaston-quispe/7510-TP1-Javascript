@@ -9,7 +9,7 @@ var ParserDefinicion = require('../src/parserDefinicion');
 var ParserRegla = require('../src/parserRegla');
 var ParserConsulta = require('../src/parserConsulta');
 
-describe("Parser", function () {
+describe("Parser unit tests:", function () {
 
 	var parser = null;
 
@@ -31,7 +31,7 @@ describe("Parser", function () {
 		// runs after each test in this block
 	});
 
-	describe('Parser test', function () {
+	describe('Creacion test', function () {
 
 		it('parsear(\'padre(juan, pepe)\') instanceof Definicion should be true', function () {
 			var linea_parseada = parser.parsearEvaluable('padre(juan, pepe)');

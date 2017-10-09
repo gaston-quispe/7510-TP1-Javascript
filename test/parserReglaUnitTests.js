@@ -6,7 +6,7 @@ var ConsultaParametrica = require('../src/consultaParametrica');
 var ParserRegla = require('../src/parserRegla');
 var Regla = require('../src/regla');
 
-describe("Definicion", function () {
+describe("ParserRegla unit tests:", function () {
 
 	var parserRegla = null;
 
@@ -27,11 +27,10 @@ describe("Definicion", function () {
 		// runs after each test in this block
 	});
 
-	describe('ParserRegla test', function () {
-		it('parserRegla.parsearLinea(\'hijo(X, Y) :- varon(X), padre(Y, X)\') should be OK', function () {
+	describe('Creacion test', function () {
+		it('parserRegla.parsearLinea(\'hijo(X, Y) :- varon(X), padre(Y, X)\') should be instanceof Regla', function () {
 		     var regla_parseada = parserRegla.parsearLinea('hijo(X, Y) :- varon(X), padre(Y, X)');
-		     var regla_creada = new Regla("hijo", ["X","Y"], [new ConsultaParametrica("varon", ["X"]), new ConsultaParametrica("padre", ["Y","X"])]);
-		     assert(regla_creada.iguales(regla_parseada) === true);
+		     assert(regla_parseada instanceof Regla === true );
 		});
 
 		it('parserRegla.parsearLinea(\'hijo(X, Y) :- vaX), padre(Y, X)\') should be null', function () {

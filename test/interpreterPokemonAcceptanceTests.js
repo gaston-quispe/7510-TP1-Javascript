@@ -152,87 +152,30 @@ describe("Interpreter Pokemon", function () {
 
      describe('Consultas invalidas', function () {
 	it('cosas_sin_formato_asdasd3$·$·$DASDWQW)EQWE)(()()) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('cosas_sin_formato_asdasd3$·$·$DASDWQW)EQWE)(()()');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('cosas_sin_formato_asdasd3$·$·$DASDWQW)EQWE)(()()'); }).to.throw(Error);
 	});
 	it('es_entrenador_mujer(maYuscula) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('es_entrenador_mujer(maYuscula)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('es_entrenador_mujer(maYuscula)'); }).to.throw(Error);
 	});
 	it('maYuscua(ash) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('maYuscua(ash)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('maYuscua(ash)'); }).to.throw(Error);
 	});
 	it('entrenador(maYuscua) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('entrenador(maYuscua)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('entrenador(maYuscua)'); }).to.throw(Error);
 	});
 	it('num3ro5(ash) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('num3ro5(ash)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('num3ro5(ash)'); }).to.throw(Error);
 	});
 	it('entrenador(num3ro) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('entrenador(num3ro)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
-	});
-	it('entrenador(num3ro) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('entrenador(num3ro)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('entrenador(num3ro)'); }).to.throw(Error);
 	});
 	it('entrenador() should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('entrenador())');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('entrenador()'); }).to.throw(Error);
 	});
 	it('entrenador(,,) should be raise exception', function () {
-	     var error = false;
-	     try {
-		    interpreter.checkQuery('entrenador(,,)');
-	     } catch(e) {
-		    error = true;
-	     }
-	     assert(error);
+		expect(function () { interpreter.checkQuery('entrenador(,,)'); }).to.throw(Error);
 	});
-	});
+     });
 
      describe('Reglas anidadas', function () {
 	it('es_entrenador_mujer_x_de_pokemon_y_de_tipo_z(misty,starmie,agua) should be true', function () {
@@ -245,4 +188,5 @@ describe("Interpreter Pokemon", function () {
 	 assert(interpreter.checkQuery('mastra_pokemon(misty)') === false);
 	});
      });
+
 });

@@ -13,6 +13,7 @@ var Interpreter = function () {
 
 	this.parseDB = function (db) {
 		for (var i = 0; i < db.length; i++) {
+			// Siempre se quita el punto del final de la linea antes de paresear
 			var evaluable = parser.parsearEvaluable(db[i].replace(/\.$/, ""));
 			if (evaluable === null) {
 				broken = true;
