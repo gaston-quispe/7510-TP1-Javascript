@@ -6,7 +6,7 @@ var ParserRegla = require('../src/parserRegla');
 
 var Interpreter = function () {
 	var broken = false;
-	diccionario = new Diccionario();
+	var diccionario = new Diccionario();
 
 	var parser = new Parser(new ParserConsulta(),
 	 			[new ParserDefinicion(), new ParserRegla()]);

@@ -1,6 +1,6 @@
 var Parser = function (parserConsulta, parsersDB) {
-	this.parserConsulta = parserConsulta
-	this.parsersDB = parsersDB;
+	var parserConsulta = parserConsulta
+	var parsersDB = parsersDB;
 
 	this.parsearConsulta = function (linea){
 		return parserConsulta.parsearLinea(linea);
