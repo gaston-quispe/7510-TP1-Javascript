@@ -3,37 +3,12 @@ var Definicion = require('../src/definicion');
 var Regla = function (nombre, parametros, consultasParametricas) {
 	// EJEMPLO SEGUN: "hijo(X, Y) :- varon(X), padre(Y, X)"
 	// "hijo"
-	this.nombre = nombre;
+	var nombre = nombre;
 	// ["x", "Y"]
-	this.parametros = parametros;
+	var parametros = parametros;
 	// [{nombre: "varon" parametros: ["X"]}, {nombre: "padre" parametros:["Y", "X"]}]
-	this.consultasParametricas = consultasParametricas;
+	var consultasParametricas = consultasParametricas;
 
-	this.iguales = function (evaluable) {
-		if (!evaluable instanceof Regla)
-			return false;
-
-		if (this.nombre !== evaluable.nombre)
-			return false;
-
-		if (this.parametros.length !== evaluable.parametros.length)
-			return false;
-
-		if (this.consultasParametricas.length !== evaluable.consultasParametricas.length)
-			return false;
-
-		for (var i = 0; i < this.parametros.length; i++)
-			if (this.parametros[i] !== evaluable.parametros[i])
-				return false;
-
-		for (var i = 0; i < this.consultasParametricas.length; i++)
-			if (!this.consultasParametricas[i].iguales(evaluable.consultasParametricas[i]))
-				return false;
-
-		return true;
-	}
-
-	//TODO: Checkear igual cantidad de elementos en parametros y valores
 	this.generarCorresponencia = function(parametros, valores) {
 		var corresponencia = {};
 		for (var i = 0; i < parametros.length; i++)
@@ -42,16 +17,16 @@ var Regla = function (nombre, parametros, consultasParametricas) {
 	}
 
 	this.generarConsultas = function(consultaBase) {
-		var corresponencia = this.generarCorresponencia(this.parametros, consultaBase.valores);
+		var corresponencia = this.generarCorresponencia(parametros, consultaBase.getValores());
 		var nuevasConsultas = [];
-		for (var i = 0; i < this.consultasParametricas.length; i++) {
-			nuevasConsultas.push(this.consultasParametricas[i].reemplazarParametros(corresponencia));
+		for (var i = 0; i < consultasParametricas.length; i++) {
+			nuevasConsultas.push(consultasParametricas[i].reemplazarParametros(corresponencia));
 		}
 		return nuevasConsultas;
 	}
 
 	this.evaluar = function(consulta, diccionario) {
-		if (consulta.nombre !== this.nombre)
+		if (consulta.getNombre() !== nombre)
 			return false;
 
 		nuevasConsultas = this.generarConsultas(consulta);

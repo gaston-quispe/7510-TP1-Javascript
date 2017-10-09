@@ -23,14 +23,14 @@ var Definicion = function (nombre, valores) {
 	}
 
 	this.evaluar = function(consulta, diccionario) {
-		if (consulta.nombre != this.nombre)
+		if (consulta.getNombre() != this.nombre)
 			return false;
 
-		if (this.valores.length !== consulta.valores.length)
+		if (this.valores.length !== consulta.getValores().length)
 			return false;
 
 		for (var i = 0; i < this.valores.length; i++)
-			if (this.valores[i] !== consulta.valores[i])
+			if (this.valores[i] !== consulta.getValores()[i])
 				return false;
 
 		return true;
