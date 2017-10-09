@@ -11,8 +11,8 @@ var ParserConsulta = function () {
 		if (!esConsultaValida(linea))
 			throw new Error( "Consulta malformada!");
 
-		var nombre =  linea.split('(')[0];
-		var valores = linea.split('(')[1].replace(" ", "").replace(/\)|\.$/g, "").split(",");
+		var nombre =  linea.split('(')[0].replace(/\s/g,'');
+		var valores = linea.split('(')[1].replace(/\s/g,'').replace(/\)$/, "").split(",");
 
 		return new Consulta(nombre, valores);
 	}
