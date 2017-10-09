@@ -1,36 +1,19 @@
 var Definicion = function (nombre, valores) {
 	// EJEMPLO SEGUN: "padre(roberto, alejandro)"
 	// "padre"
-	this.nombre = nombre;
+	var nombre = nombre;
 	// ["roberto", "alejandro"]
-	this.valores = valores;
-
-	this.iguales = function (evaluable) {
-		if (!evaluable instanceof Definicion)
-			return false;
-
-		if (this.nombre !== evaluable.nombre)
-			return false;
-
-		if (this.valores.length !== evaluable.valores.length)
-			return false;
-
-		for (var i = 0; i < this.valores.length; i++)
-			if (this.valores[i] !== evaluable.valores[i])
-				return false;
-
-		return true;
-	}
+	var valores = valores;
 
 	this.evaluar = function(consulta, diccionario) {
-		if (consulta.getNombre() != this.nombre)
+		if (consulta.getNombre() != nombre)
 			return false;
 
-		if (this.valores.length !== consulta.getValores().length)
+		if (valores.length !== consulta.getValores().length)
 			return false;
 
-		for (var i = 0; i < this.valores.length; i++)
-			if (this.valores[i] !== consulta.getValores()[i])
+		for (var i = 0; i < valores.length; i++)
+			if (valores[i] !== consulta.getValores()[i])
 				return false;
 
 		return true;
@@ -40,8 +23,8 @@ var Definicion = function (nombre, valores) {
 	this.reemplazarValores = function (corresponencia) {
 		var nuevosValores = [];
 
-		for (var i = 0; i < this.valores.length; i++)
-			nuevosValores.push(corresponencia[this.valores[i]]);
+		for (var i = 0; i < valores.length; i++)
+			nuevosValores.push(corresponencia[valores[i]]);
 
 		return new Definicion(nombre, nuevosValores);
 	}
