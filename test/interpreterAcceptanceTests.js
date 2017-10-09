@@ -122,4 +122,16 @@ describe("Interpreter", function () {
 
     });
 
+    describe('Broken query', function () {
+	    it('interpreter.checkQuery(\'hijo(pepe,) juan)\') should be raise Error', function () {
+		    var excepcionCorrecta = false;
+		    try {
+			    interpreter.checkQuery('hijo(pepe,) juan)');
+		    } catch(error) {
+			    excepcionCorrecta = (error.toString() === "Error: Consulta malformada!");
+		    }
+		    assert(excepcionCorrecta === true);
+	    });
+    });
+
 });

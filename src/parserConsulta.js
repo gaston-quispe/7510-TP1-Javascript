@@ -9,7 +9,7 @@ var ParserConsulta = function () {
 
 	this.parsearLinea = function(linea) {
 		if (!esConsultaValida(linea))
-			return null;
+			throw new Error( "Consulta malformada!");;
 
 		var nombre =  linea.split('(')[0];
 		var valores = linea.split('(')[1].replace(" ", "").replace(/\)|\.$/g, "").split(",");
