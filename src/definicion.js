@@ -34,9 +34,9 @@ var Definicion = function (nombre, valores) {
 	}
 
 
-	this.reemplazarParametros = function (corresponencia) {
+	this.reemplazarValores = function (corresponencia) {
 		var nuevosValores = [];
-		
+
 		for (var i = 0; i < this.valores.length; i++)
 			nuevosValores.push(corresponencia[this.valores[i]]);
 

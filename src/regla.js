@@ -42,7 +42,7 @@ var Regla = function (nombre, parametros, definiciones) {
 
 		var nuevasConsultas = [];
 		for (var i = 0; i < definiciones.length; i++)
-			nuevasConsultas.push(definiciones[i].reemplazarParametros(corresponencia));
+			nuevasConsultas.push(definiciones[i].reemplazarValores(corresponencia));
 
 		return nuevasConsultas;
 	}

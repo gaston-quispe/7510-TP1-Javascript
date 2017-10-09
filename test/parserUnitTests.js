@@ -5,6 +5,9 @@ var assert = require('assert');
 var Parser = require('../src/parser');
 var Definicion = require('../src/definicion');
 var Regla = require('../src/regla');
+var ParserDefinicion = require('../src/parserDefinicion');
+var ParserRegla = require('../src/parserRegla');
+var ParserConsulta = require('../src/parserConsulta');
 
 describe("Parser", function () {
 
@@ -20,7 +23,8 @@ describe("Parser", function () {
 
 	beforeEach(function () {
 		// runs before each test in this block
-		parser = new Parser();
+		parser = new Parser(new ParserConsulta(),
+				[new ParserDefinicion(), new ParserRegla()])
 	});
 
 	afterEach(function () {
@@ -28,33 +32,33 @@ describe("Parser", function () {
 	});
 
 	describe('Parser test', function () {
-		it('esReglaValida(\'hijo(X, Y) :- varon(X), padre(Y, X).\') should be true', function () {
-			assert(parser.esReglaValida('hijo(X, Y) :- varon(X), padre(Y, X).') === true);
-		});
+		// it('esReglaValida(\'hijo(X, Y) :- varon(X), padre(Y, X).\') should be true', function () {
+		// 	assert(parser.esReglaValida('hijo(X, Y) :- varon(X), padre(Y, X).') === true);
+		// });
+		//
+		// it('esDefinicionValida(\'padre(juan, pepe).\') should be true', function () {
+		// 	assert(parser.esDefinicionValida('padre(juan, pepe).') === true);
+		// });
 
-		it('esDefinicionValida(\'padre(juan, pepe).\') should be true', function () {
-			assert(parser.esDefinicionValida('padre(juan, pepe).') === true);
-		});
-
-		it('parsearDefinicion(\'padre(juan, pepe).\') should be true', function () {
-			var def_parseada = parser.parsearDefinicion('padre(juan, pepe).');
-			var def_creada = new Definicion("padre", ["juan", "pepe"]);
-			assert(def_creada.iguales(def_parseada) === true);
-		});
-
-		it('parsearRegla(\'hijo(X, Y) :- varon(X), padre(Y, X).\') should be true', function () {
-		     var regla_parseada = parser.parsearRegla('hijo(X, Y) :- varon(X), padre(Y, X).');
-		     var regla_creada = new Regla("hijo", ["X","Y"], [new Definicion("varon", ["X"]), new Definicion("padre", ["Y","X"])]);
-		     assert(regla_creada.iguales(regla_parseada) === true);
-		});
+		// it('parsearDefinicion(\'padre(juan, pepe).\') should be true', function () {
+		// 	var def_parseada = parser.parsearDefinicion('padre(juan, pepe).');
+		// 	var def_creada = new Definicion("padre", ["juan", "pepe"]);
+		// 	assert(def_creada.iguales(def_parseada) === true);
+		// });
+		//
+		// it('parsearRegla(\'hijo(X, Y) :- varon(X), padre(Y, X).\') should be true', function () {
+		//      var regla_parseada = parser.parsearRegla('hijo(X, Y) :- varon(X), padre(Y, X).');
+		//      var regla_creada = new Regla("hijo", ["X","Y"], [new Definicion("varon", ["X"]), new Definicion("padre", ["Y","X"])]);
+		//      assert(regla_creada.iguales(regla_parseada) === true);
+		// });
 
 		it('parsear(\'padre(juan, pepe).\') instanceof Definicion should be true', function () {
-			var linea_parseada = parser.parsear('padre(juan, pepe).');
+			var linea_parseada = parser.parsearEvaluable('padre(juan, pepe).');
 			assert(linea_parseada instanceof Definicion === true);
 		});
 
 		it('parsear(\'hijo(X, Y) :- varon(X), padre(Y, X).\') instanceof Regla should be true', function () {
-		     var linea_parseada = parser.parsear('hijo(X, Y) :- varon(X), padre(Y, X).');
+		     var linea_parseada = parser.parsearEvaluable('hijo(X, Y) :- varon(X), padre(Y, X).');
 		     assert(linea_parseada instanceof Regla === true);
 		});
 
